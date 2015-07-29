@@ -1,5 +1,5 @@
-<div style="display: none;">
-  <div id="similar_issues">
+<div id="similar_issues_root">
+  <div id="similar_issues" style="display: none;">
     <b><%= l(:dym_similar_issues_caption) %> (<span id="issues_count">&nbsp;</span>)</b>
     <ul id="similar_issues_list"></ul>
   </div>
@@ -15,8 +15,8 @@
     label_more: "<%= l(:dym_more_issues) %>",
     label_in: "<%= l(:dym_in_project) %>",
     issue_url: "<%= url_for(Issue.new) %>",
-    search_url: "<%= url_for(:action => 'index', :controller => 'search_issues', :format => 'json') %>"
+    search_url: "<%= url_for(:action => 'index', :controller => 'search_issues') %>"
   };
 </script>
 
-<%= javascript_tag "observeIssueSubjectField('#{@project.id}');" %>
+<%= javascript_tag "observeIssueSubjectField('#{@project.id}', #{@issue.id or '\'\''}, '#{Setting.plugin_redmine_didyoumean['start_search_when'] == "1" ? "keyup" : "change"}');" %>
